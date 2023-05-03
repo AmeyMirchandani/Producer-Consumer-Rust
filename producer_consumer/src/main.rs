@@ -1,3 +1,5 @@
+mod ledger;
+
 use std::{env, vec, process::exit};
 
 fn main() {
@@ -8,6 +10,8 @@ fn main() {
         exit(-1);
     }
 
-    let p: u32 = args[1].parse().unwrap();
-    // init bank
+    let num_workers: u32 = args[1].parse().unwrap();
+    let filename: &str = &args[2];
+    
+    ledger::initBank(num_workers, filename);
 }
