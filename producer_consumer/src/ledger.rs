@@ -1,6 +1,5 @@
 mod bank;
 
-use core::num;
 use std::{sync::{Mutex, Arc, MutexGuard}, thread::{JoinHandle, self}, fs};
 use bank::Bank;
 
@@ -13,7 +12,7 @@ enum Mode {
 struct Ledger {
 	from: u32,
 	to: u32,
-	amount: u32,
+	amount: u64,
   	mode: Mode,
 	ledger_id: u32,
 }
@@ -35,6 +34,8 @@ pub fn initBank(num_workers: u32, filename: &str) -> () {
     for handler in worker_handlers { // join worker threads
         handler.join().unwrap();
     }
+
+    bank.printAccounts(); // print info on each account and fail/success count
 }
 
 fn loadLedger(filename: &str, ledgers: &Arc<Mutex<Vec<Ledger>>>) -> () {
@@ -52,7 +53,7 @@ fn loadLedger(filename: &str, ledgers: &Arc<Mutex<Vec<Ledger>>>) -> () {
         
         let from: u32 = split_line[0].parse().unwrap();
         let to: u32 = split_line[1].parse().unwrap();
-        let amount: u32 = split_line[2].parse().unwrap();
+        let amount: u64 = split_line[2].parse().unwrap();
         let mode: Mode = match split_line[3].parse().unwrap() {
             0 => Mode::Deposit,
             1 => Mode::Withdraw,
