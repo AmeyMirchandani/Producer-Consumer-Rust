@@ -1,6 +1,6 @@
 mod ledger;
 
-use std::{env, vec, process::exit};
+use std::{env, process::exit};
 
 fn main() {
     let args: Vec<String> = env::args().collect();

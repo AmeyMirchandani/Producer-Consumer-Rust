@@ -82,8 +82,6 @@ fn worker(worker_id: u32, bank_ref: Arc<Bank>, ledger_list_lock: Arc<Mutex<Vec<L
         let amount = nextItem.amount;
         let mode = nextItem.mode;
 
-        //println!("ID: {}, FROM: {}, TO: {}, AMNT: {}", ledger_id, from_id, to_id, amount);
-
         drop(my_ledger_ref); // give up lock to the ledger list
 
         match mode {
@@ -95,19 +93,3 @@ fn worker(worker_id: u32, bank_ref: Arc<Bank>, ledger_list_lock: Arc<Mutex<Vec<L
         my_ledger_ref = ledger_list_lock.lock().unwrap(); // aquire lock again
     }
 }
-
-// fn recordFail(message: &str, bank_lock: &Arc<Mutex<Bank>>) -> () {
-//     let mut bank = bank_lock.lock().unwrap(); // get bank lock
-
-//     println!("{}", message); // print message
-    
-//     (*bank).num_fail += 1; // increment fail count
-// }
-
-// fn recordSucc(message: &str, bank_lock: &Arc<Mutex<Bank>>) -> () {
-//     let mut bank = bank_lock.lock().unwrap(); // get bank lock
-
-//     println!("{}", message); // print message
-    
-//     (*bank).num_succ += 1; // increment success count
-// }
