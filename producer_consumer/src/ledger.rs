@@ -22,7 +22,6 @@ pub fn initBank(num_workers: u32, filename: &str) -> () {
 
     let ledgers: Arc<Mutex<Vec<Ledger>>> = Arc::new(Mutex::new(Vec::new())); // a lock holding the list of ledgers (empty)
     let bank = Arc::new(Bank::new()); // bank smart pointer
-    //let bank_lock: Arc<Mutex<Bank>> = Arc::new(Mutex::new(Bank::new())) ; // bank that will be used
 
     loadLedger(filename, &ledgers); // load text file contents into the ledger list
 
@@ -61,10 +60,7 @@ fn loadLedger(filename: &str, ledgers: &Arc<Mutex<Vec<Ledger>>>) -> () {
             _ => Mode::Deposit // random mode, doesn't matter
         };
 
-        //println!("From: {}, To: {}, Amount: {}, Mode: {}", from, to, amount, split_line[3]);
-
         (*ledger_list).push(Ledger { from: from, to: to, amount: amount, mode: mode, ledger_id: ledger_id });
-        //println!("Ledgerlist Length: {}", (*ledger_list).len());
 
         ledger_id += 1;
     }

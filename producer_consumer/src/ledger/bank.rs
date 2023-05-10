@@ -17,7 +17,7 @@ impl Bank {
     pub fn new() -> Self {
         let mut accts: Vec<Arc<Mutex<Account>>> = Vec::new();
         
-        for i in 0..10 {
+        for i in 0..10 { //push 10 accounts to the account list
             accts.push(Arc::new(Mutex::new(Account { account_id: i, balance: 0 })));
         }
 
