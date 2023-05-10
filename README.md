@@ -1,4 +1,7 @@
 # Producer-Consumer-Rust
+## Video Link: https://youtu.be/d7H9xAPxfQQ
+#
+
 ## Program Usage
 While in src folder, in terminal, run:
 
